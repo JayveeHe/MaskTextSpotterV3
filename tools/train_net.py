@@ -5,24 +5,24 @@ Basic training script for PyTorch
 
 # Set up custom environment before nearly anything else is imported
 # NOTE: this should be the first import (no not reorder)
-from maskrcnn_benchmark.utils.env import setup_environment  # noqa F401 isort:skip
+from masktextspotterv3.utils.env import setup_environment  # noqa F401 isort:skip
 
 import argparse
 import os
 
 import torch
-from maskrcnn_benchmark.config import cfg
-from maskrcnn_benchmark.data import make_data_loader
-from maskrcnn_benchmark.solver import make_lr_scheduler
-from maskrcnn_benchmark.solver import make_optimizer
-from maskrcnn_benchmark.engine.trainer import do_train
-from maskrcnn_benchmark.modeling.detector import build_detection_model
-from maskrcnn_benchmark.utils.checkpoint import DetectronCheckpointer
-from maskrcnn_benchmark.utils.collect_env import collect_env_info
-from maskrcnn_benchmark.utils.comm import synchronize, get_rank
-from maskrcnn_benchmark.utils.imports import import_file
-from maskrcnn_benchmark.utils.logging import setup_logger, Logger
-from maskrcnn_benchmark.utils.miscellaneous import mkdir
+from masktextspotterv3.config import cfg
+from masktextspotterv3.data import make_data_loader
+from masktextspotterv3.solver import make_lr_scheduler
+from masktextspotterv3.solver import make_optimizer
+from masktextspotterv3.engine.trainer import do_train
+from masktextspotterv3.modeling.detector import build_detection_model
+from masktextspotterv3.utils.checkpoint import DetectronCheckpointer
+from masktextspotterv3.utils.collect_env import collect_env_info
+from masktextspotterv3.utils.comm import synchronize, get_rank
+from masktextspotterv3.utils.imports import import_file
+from masktextspotterv3.utils.logging import setup_logger, Logger
+from masktextspotterv3.utils.miscellaneous import mkdir
 # See if we can use apex.DistributedDataParallel instead of the torch default,
 # and enable mixed-precision via apex.amp
 try:
@@ -132,7 +132,7 @@ def main():
         mkdir(output_dir)
 
     local_rank = get_rank()
-    logger = setup_logger("maskrcnn_benchmark", output_dir, local_rank)
+    logger = setup_logger("masktextspotterv3", output_dir, local_rank)
     if local_rank == 0:
         logger.info("Using {} GPUs".format(num_gpus))
         logger.info(args)

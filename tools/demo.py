@@ -3,11 +3,11 @@ import cv2
 import torch
 from torchvision import transforms as T
 
-from maskrcnn_benchmark.modeling.detector import build_detection_model
-from maskrcnn_benchmark.utils.checkpoint import DetectronCheckpointer
-from maskrcnn_benchmark.structures.image_list import to_image_list
-from maskrcnn_benchmark.config import cfg
-from maskrcnn_benchmark.utils.chars import getstr_grid, get_tight_rect
+from masktextspotterv3.modeling.detector import build_detection_model
+from masktextspotterv3.utils.checkpoint import DetectronCheckpointer
+from masktextspotterv3.structures.image_list import to_image_list
+from masktextspotterv3.config import cfg
+from masktextspotterv3.utils.chars import getstr_grid, get_tight_rect
 
 from PIL import Image
 import numpy as np
@@ -216,7 +216,8 @@ def main(args):
     cfg.merge_from_file(args.config_file)
     # manual override some options
     # cfg.merge_from_list(["MODEL.DEVICE", "cpu"])
-
+    cfg['MODEL']['WEIGHT'] = '/Users/jiawhe/playground/MaskTextSpotterV3/data/MaskTextSpotterV3_trained_model.pth'
+    cfg['MODEL']['DEVICE'] = 'cpu'
     text_demo = TextDemo(
         cfg,
         min_image_size=800,
@@ -232,8 +233,8 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='parameters for demo')
-    parser.add_argument("--config-file", type=str, default='configs/mixtrain/seg_rec_poly_fuse_feature.yaml')
-    parser.add_argument("--image_path", type=str, default='./demo_images/demo.jpg')
-    parser.add_argument("--visu_path", type=str, default='./demo_images/demo_results.jpg')
+    parser.add_argument("--config-file", type=str, default='../data/seg_rec_poly_fuse_feature.yaml')
+    parser.add_argument("--image_path", type=str, default='../data/')
+    parser.add_argument("--visu_path", type=str, default='../data/demo_results.jpg')
     args = parser.parse_args()
     main(args)
