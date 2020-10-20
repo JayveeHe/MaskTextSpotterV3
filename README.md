@@ -10,6 +10,9 @@ This is a PyTorch implemntation of the ECCV 2020 paper [Mask TextSpotter v3](htt
 - Add spell fix support with [symspell](https://github.com/mammothb/symspellpy)
 
 
+## Demo
+See `tests/check_ocr_result.py` for details.
+
 ---
 # Original README
 

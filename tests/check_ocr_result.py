@@ -7,7 +7,7 @@ https://github.com/JayveeHe
 import io
 import os
 
-import cv2
+# import cv2
 import numpy
 import requests
 from PIL import Image
@@ -39,7 +39,6 @@ mts = MaskTextSpotter(
 # img_obj = img_obj.convert('RGB')
 #
 img_obj = Image.open('./products-1000-SATIVA-OIL.png')
-
 
 img_obj = img_obj.convert('RGB')
 
