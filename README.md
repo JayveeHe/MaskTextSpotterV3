@@ -8,8 +8,6 @@
 - Support spell fix with [symspell](https://github.com/mammothb/symspellpy)
 
 ## Installation
-### For test-only use case
-1. `export TORCH_CUDA_ARCH_LIST="compute capability"` when install apex
 
 ### CentOS
 ```shell
