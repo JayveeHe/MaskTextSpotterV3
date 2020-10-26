@@ -35,10 +35,10 @@ python3 setup.py build install
 ```
 
 ## Demo
-See `tests/check_ocr_result.py` for details.
+See `demo/ocr_demo.ipynb` for details.
 1. Download trained model weight from [Google Drive](https://drive.google.com/file/d/1XQsikiNY7ILgZvmvOeUf9oPDG4fTp0zs/view?usp=sharing), [BaiduYun](https://pan.baidu.com/s/1fV1RbyQ531IifdKxkScItQ) (downloading code: cnj2).
 2. Put model file to `data/MaskTextSpotterV3_trained_model.pth`
-3. `python3 $(PWD)/tests/check_ocr_result.py`
+3. `python3 $(PWD)/demo/check_ocr_result.py`
 
 ---
 # Original README
