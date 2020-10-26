@@ -9,7 +9,6 @@ import os
 
 # import cv2
 import numpy
-import requests
 from PIL import Image
 from masktextspotterv3.textspotter import MaskTextSpotter
 
