@@ -12,3 +12,5 @@ Polygon3
 editdistance
 torch
 torchvision
+pycocotools
+symspellpy
