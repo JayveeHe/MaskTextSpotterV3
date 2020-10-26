@@ -7,20 +7,18 @@ https://github.com/JayveeHe
 import io
 import os
 
-# import cv2
 import numpy
 from PIL import Image
 from masktextspotterv3.textspotter import MaskTextSpotter
 
 from masktextspotterv3.config import cfg
 
-PROJECT_PATH = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+PROJECT_PATH = os.path.dirname(os.path.dirname(__file__))
 DATAPATH = '%s/data' % PROJECT_PATH
 #
-cfg.merge_from_file('../data/seg_rec_poly_fuse_feature.yaml')
-# cfg = pickle.load(open('%s/models/OCR/config.pkl' % DATAPATH, 'rb'))
+cfg.merge_from_file('%s/seg_rec_poly_fuse_feature.yaml' % DATAPATH)
 # print('initing ocr model')
-cfg['MODEL']['WEIGHT'] = '../data/MaskTextSpotterV3_trained_model.pth'
+cfg['MODEL']['WEIGHT'] = '%s/MaskTextSpotterV3_trained_model.pth' % DATAPATH
 cfg['MODEL']['DEVICE'] = 'cpu'
 
 target_size = 800
@@ -37,7 +35,7 @@ mts = MaskTextSpotter(
 # img_obj = Image.open(io.BytesIO(requests.get(test_url, verify=False).content))
 # img_obj = img_obj.convert('RGB')
 #
-img_obj = Image.open('./products-1000-SATIVA-OIL.png')
+img_obj = Image.open('%s/demo_test_image.png' % DATAPATH)
 
 img_obj = img_obj.convert('RGB')
 
@@ -60,9 +58,8 @@ result_polygons, result_words, result_lines = mts.run_on_pillow_image(img_obj)
 open_cv_image = numpy.array(img_obj)
 # Convert RGB to BGR
 open_cv_image = open_cv_image[:, :, ::-1].copy()
-# line_result_words = [a[1][0]['seq_word'] for a in result_lines['details']]
-# line_result_polygons = [a[1][0]['polygon'] for a in result_lines['details']]
 result_image = mts.visualization(open_cv_image, result_polygons, result_words)
 result_image = Image.fromarray(result_image[:, :, ::-1])
 result_image.show()
+# result_image.save('%s/demo_results.jpg' % DATAPATH)
 print(result_words)

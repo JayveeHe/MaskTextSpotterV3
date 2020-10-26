@@ -2,14 +2,43 @@
 # Mask TextSpotter v3 (modified by Jayvee)
 
 ## **Modification**
-- Compatibility with CPU-Only machine
-- Rename the package from `maskrcnn_benchmark` to `masktextspotterv3`
-- Support line detection
-- Add spell fix support with [symspell](https://github.com/mammothb/symspellpy)
+- Compatibility with CPU-Only machines
+- Rename the package from `maskrcnn_benchmark` to `masktextspotterv3`, to avoid confusing.
+- Support line/phrase detection
+- Support spell fix with [symspell](https://github.com/mammothb/symspellpy)
 
+## Installation
+### For test-only use case
+1. `export TORCH_CUDA_ARCH_LIST="compute capability"` when install apex
+
+### CentOS
+```shell
+yum -y install python3 python3-devel git mesa-libGL centos-release-scl which
+# install gcc-8
+yum -y install devtoolset-8-gcc devtoolset-8-gcc-c++
+# switch to gcc-8
+source /opt/rh/devtoolset-8/enable bash 
+
+# get MaskTextSpotter codes
+git clone https://github.com/JayveeHe/MaskTextSpotterV3.git && cd MaskTextSpotterV3 && git checkout jayvee-dev
+pip3 install -r requirements.txt
+
+# install apex with CPU-ONLY machines
+git clone https://github.com/NVIDIA/apex.git && cd apex && export TORCH_CUDA_ARCH_LIST="compute capability"
+python3 setup.py install
+
+# install MaskTextSpotterV3
+cd ..
+python3 setup.py build install
+
+
+```
 
 ## Demo
 See `tests/check_ocr_result.py` for details.
+1. Download trained model weight from [Google Drive](https://drive.google.com/file/d/1XQsikiNY7ILgZvmvOeUf9oPDG4fTp0zs/view?usp=sharing), [BaiduYun](https://pan.baidu.com/s/1fV1RbyQ531IifdKxkScItQ) (downloading code: cnj2).
+2. Put model file to `data/MaskTextSpotterV3_trained_model.pth`
+3. `python3 $(PWD)/tests/check_ocr_result.py`
 
 ---
 # Original README
