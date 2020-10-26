@@ -1,0 +1,14 @@
+ninja
+yacs
+cython
+matplotlib
+tqdm
+opencv-python
+shapely
+scipy
+tensorboardX
+pyclipper
+Polygon3
+editdistance
+pytorch
+torchvision
