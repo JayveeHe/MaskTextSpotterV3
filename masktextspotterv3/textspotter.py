@@ -43,7 +43,10 @@ class MaskTextSpotter(object):
         self.spellfix = spellfix
 
         checkpointer = DetectronCheckpointer(cfg, self.model)
-        _ = checkpointer.load(cfg.MODEL.WEIGHT)
+        if cfg.MODEL.WEIGHT:
+            import logging
+            logging.info('loading MaskTextSpotter from %s' % cfg.MODEL.WEIGHT)
+            _ = checkpointer.load(cfg.MODEL.WEIGHT)
 
         self.transforms = self.build_transform()
         self.cpu_device = torch.device("cpu")
