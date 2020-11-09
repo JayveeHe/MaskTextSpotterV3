@@ -53,7 +53,7 @@ class MaskTextSpotter(object):
         self.sym_spell.load_bigram_dictionary(bigram_dictionary_path, term_index=0, count_index=2)
 
         checkpointer = DetectronCheckpointer(cfg, self.model)
-        if cfg.MODEL.WEIGHT:
+        if len(cfg.MODEL.WEIGHT):
             import logging
             logging.info('loading MaskTextSpotter from %s' % cfg.MODEL.WEIGHT)
             _ = checkpointer.load(cfg.MODEL.WEIGHT)
