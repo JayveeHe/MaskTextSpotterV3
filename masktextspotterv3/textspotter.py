@@ -7,6 +7,7 @@ import copy
 import random
 
 import cv2
+import pkg_resources
 import torch
 from shapely.geometry import Polygon, LineString, Point
 from torchvision import transforms as T
@@ -18,10 +19,7 @@ from masktextspotterv3.utils.chars import getstr_grid, get_tight_rect
 
 from PIL import Image
 import numpy as np
-
 from symspellpy import SymSpell, Verbosity
-
-sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
 
 
 class MaskTextSpotter(object):
@@ -42,8 +40,21 @@ class MaskTextSpotter(object):
 
         self.spellfix = spellfix
 
+        self.sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
+        dictionary_path = pkg_resources.resource_filename("symspellpy", "frequency_dictionary_en_82_765.txt")
+
+        bigram_dictionary_path = pkg_resources.resource_filename("symspellpy",
+                                                                 "frequency_bigramdictionary_en_243_342.txt")
+
+        self.sym_spell.load_dictionary(dictionary_path, term_index=0, count_index=1)
+
+        self.sym_spell.load_bigram_dictionary(bigram_dictionary_path, term_index=0, count_index=2)
+
         checkpointer = DetectronCheckpointer(cfg, self.model)
-        _ = checkpointer.load(cfg.MODEL.WEIGHT)
+        if len(cfg.MODEL.WEIGHT):
+            import logging
+            logging.info('loading MaskTextSpotter from %s' % cfg.MODEL.WEIGHT)
+            _ = checkpointer.load(cfg.MODEL.WEIGHT)
 
         self.transforms = self.build_transform()
         self.cpu_device = torch.device("cpu")
@@ -100,7 +111,7 @@ class MaskTextSpotter(object):
         def spell_fix(wd):
             if self.spellfix:
                 new_word = [s.term for s in
-                            sym_spell.lookup(wd, Verbosity.CLOSEST, max_edit_distance=2, include_unknown=True)][0]
+                            self.sym_spell.lookup(wd, Verbosity.CLOSEST, max_edit_distance=2, include_unknown=True)][0]
             else:
                 new_word = wd
             return new_word
