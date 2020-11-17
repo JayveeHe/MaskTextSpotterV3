@@ -10,7 +10,6 @@ import cv2
 import pkg_resources
 import torch
 from shapely.geometry import Polygon, LineString, Point
-from symspellpy import Verbosity
 from torchvision import transforms as T
 
 from masktextspotterv3.modeling.detector import build_detection_model
@@ -20,6 +19,7 @@ from masktextspotterv3.utils.chars import getstr_grid, get_tight_rect
 
 from PIL import Image
 import numpy as np
+from symspellpy import SymSpell, Verbosity
 
 
 class MaskTextSpotter(object):
@@ -39,8 +39,6 @@ class MaskTextSpotter(object):
         self.min_image_size = min_image_size
 
         self.spellfix = spellfix
-
-        from symspellpy import SymSpell, Verbosity
 
         self.sym_spell = SymSpell(max_dictionary_edit_distance=2, prefix_length=7)
         dictionary_path = pkg_resources.resource_filename("symspellpy", "frequency_dictionary_en_82_765.txt")
