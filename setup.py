@@ -60,7 +60,7 @@ def get_extensions():
 setup(
     # name="masktextspotterv3",
     name="masktextspotterv3",
-    version="0.1.2",
+    version="0.1.3",
     author="fmassa",
     url="https://github.com/facebookresearch/maskrnn-benchmark",
     description="object detection in pytorch",
