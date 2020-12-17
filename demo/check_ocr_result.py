@@ -25,19 +25,20 @@ target_size = 800
 mts = MaskTextSpotter(
     cfg,
     min_image_size=target_size,
-    confidence_threshold=0.7,
+    confidence_threshold=0.01,
     output_polygon=True,
-    spellfix=True
+    spellfix=False
 )
 
-# test_url = 'https://cdn.shopifycdn.net/s/files/1/0776/4131/products/DSC00281square_693x693.jpg?v=1571454428'
+test_url = 'https://cdn.shopifycdn.net/s/files/1/0204/0505/9684/products/IMG_20200724_154245_540x.jpg?v=1595578416'
 #
-# img_obj = Image.open(io.BytesIO(requests.get(test_url, verify=False).content))
-# img_obj = img_obj.convert('RGB')
-#
-img_obj = Image.open('%s/demo_test_image.png' % DATAPATH)
-
+import requests
+img_obj = Image.open(io.BytesIO(requests.get(test_url, verify=False).content))
 img_obj = img_obj.convert('RGB')
+#
+# img_obj = Image.open('%s/demo_test_image.png' % DATAPATH)
+#
+# img_obj = img_obj.convert('RGB')
 
 img_size = img_obj.size
 # print(datetime.datetime.now(), 'convert rgb')
