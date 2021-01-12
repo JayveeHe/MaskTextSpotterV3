@@ -81,7 +81,6 @@ def prepare_prediction_result(input_dir, output_dir, mts_version=3, c=0.7, min_s
         # v2
 
         from maskrcnn_benchmark.textspotter import MaskTextSpotter
-        # DATAPATH = '/Users/jiawhe/Jobs/WebInspection-Model-Pipeline/data'
 
         from maskrcnn_benchmark.config import cfg
 
