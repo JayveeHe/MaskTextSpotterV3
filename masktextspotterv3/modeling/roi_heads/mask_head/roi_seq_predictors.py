@@ -117,9 +117,9 @@ class SequencePredictor(nn.Module):
                 (seq_decoder_input_reshape.size(1), 1), dtype=np.int32
             )
             bos_onehot[:, 0] = self.cfg.SEQUENCE.BOS_TOKEN
-            decoder_input = torch.tensor(bos_onehot.tolist(), device=gpu_device)
+            decoder_input = torch.tensor(bos_onehot.tolist(), device=self.device)
             decoder_hidden = torch.zeros(
-                (seq_decoder_input_reshape.size(1), 256), device=gpu_device
+                (seq_decoder_input_reshape.size(1), 256), device=self.device
             )
             use_teacher_forcing = (
                 True
